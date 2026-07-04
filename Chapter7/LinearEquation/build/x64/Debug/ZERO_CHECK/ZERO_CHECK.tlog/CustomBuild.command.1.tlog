@@ -1,0 +1,10 @@
+^E:\CODE\CPP\CLASS\CPPBOOK\CHAPTER7\LINEAREQUATION\BUILD\CMAKEFILES\BCA8818CA770B510A4DFBE934D2C8331\GENERATE.STAMP.RULE
+setlocal
+C:\Users\LYW\scoop\apps\cmake\current\bin\cmake.exe -SE:/Code/CPP/Class/CppBook/Chapter7/LinearEquation -BE:/Code/CPP/Class/CppBook/Chapter7/LinearEquation/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Code/CPP/Class/CppBook/Chapter7/LinearEquation/build/linearEqu.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

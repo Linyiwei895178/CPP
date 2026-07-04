@@ -58,7 +58,7 @@ bool LinearEqu::solve() {
         if (max == 0) {
             delete[] js;
             return false;
-        } 
+        }
         else {
             if (js[k] != k)
                 for (int i = 0; i < getSize(); i++)
@@ -69,6 +69,36 @@ bool LinearEqu::solve() {
                 swap(sums[k], sums[is]);
             }
         }
+
+        double major = element(k, k); 
+        for (int j = k + 1; j < getSize(); j++)
+            element(k, j) /= major;
+        sums[k] /= major;
+        for (int i = k + 1; i < getSize(); i++) {
+            for (int j = k + 1; j < getSize(); j++)
+                element(i, j) -= element(i, k) * element(k, j);
+            sums[i] -= element(i, k) * sums[k];
+        }
+
+        double d = element(getSize() - 1, getSize() - 1);
+        if (fabs(d) < 1e-15) {
+            delete[] js;
+            return false;
+        }
+
+        solution[getSize() - 1] = sums[getSize() - 1] / d;
+        for (int i = getSize() - 2; i >= 0 ;i--) {
+            double t = 0.0;
+            for (int j = i + 1; j <= getSize() - 1; j++)
+                t += element(i, j) * solution[j];
+            solution[i] = sums[i] - t;
+        }
+
+        js[getSize() - 1] = getSize() - 1;
+        for (int k = getSize() - 1; k >= 0; k--)
+            if (js[k] != k) swap(solution[k], solution[js[k]]);
+        delete[] js;
+        return true;
         }
     }
 }
