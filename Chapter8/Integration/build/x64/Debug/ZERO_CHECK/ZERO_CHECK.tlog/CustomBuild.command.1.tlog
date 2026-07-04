@@ -1,0 +1,10 @@
+^E:\CODE\CPP\CLASS\CPPBOOK\CHAPTER8\INTEGRATION\BUILD\CMAKEFILES\3AF2BC89A98277DEFB837B3A9D048307\GENERATE.STAMP.RULE
+setlocal
+C:\Users\LYW\scoop\apps\cmake\current\bin\cmake.exe -SE:/Code/CPP/Class/CppBook/Chapter8/Integration -BE:/Code/CPP/Class/CppBook/Chapter8/Integration/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Code/CPP/Class/CppBook/Chapter8/Integration/build/Integration.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
