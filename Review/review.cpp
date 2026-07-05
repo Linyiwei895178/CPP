@@ -248,6 +248,54 @@
 //     return 0;
 // }
 
+// #include <iostream>
+// using namespace std;
+
+// class Three_d {
+// private:
+//     int x, y, z;
+// public:
+//     Three_d(int i = 0, int j = 0, int k = 0) : x(i), y(j), z(k) {}
+
+//     Three_d& operator++() {
+//         ++x; ++y; ++z;
+//         return *this;
+//     }
+
+//     Three_d& operator++(int) {
+//         x++; y++; z++;
+//         return *this;
+//     }
+
+//     Three_d& operator--() {
+//         --x; --y; --z;
+//         return *this;
+//     }
+
+//     Three_d& operator--(int) {
+//         x--; y--; z--;
+//         return *this;
+//     }
+
+//     void display() {
+//         cout << x << " " << y << " " << z << endl;
+//     }
+// };
+
+// int main()
+// {
+//     Three_d my(1, 1, 1);
+//     my++;
+//     my.display();
+//     my--;
+//     my.display();
+//     --my;
+//     my.display();
+//     ++my;
+//     my.display();
+//     return 0;
+// }
+
 #include <iostream>
 using namespace std;
 
@@ -257,41 +305,54 @@ private:
 public:
     Three_d(int i = 0, int j = 0, int k = 0) : x(i), y(j), z(k) {}
 
-    Three_d& operator++() {
+    // 1. 前缀自增 (++obj) ：先改变对象状态，再返回修改后的对象自身引用
+    Three_d &operator++() {
         ++x; ++y; ++z;
-        return *this;
+        return *this; // 返回自身引用
     }
 
-    Three_d& operator++(int) {
-        x++; y++; z++;
-        return *this;
+    // 2. 后缀自增 (obj++) ：利用“哑元(int)”与前缀区分。先保存旧状态，再修改，最后返回旧状态副本
+    Three_d operator++(int) {
+        Three_d temp = *this; // 拷贝保存原状态
+        ++x; ++y; ++z;        // 修改当前对象
+        return temp;          // 返回原状态的临时副本（必须以“值”形式返回）
     }
 
-    Three_d& operator--() {
+    // 3. 前缀自减 (--obj)
+    Three_d &operator--() {
         --x; --y; --z;
         return *this;
     }
 
-    Three_d& operator--(int) {
-        x--; y--; z--;
-        return *this;
+    // 4. 后缀自减 (obj--)
+    Three_d operator--(int) {
+        Three_d temp = *this;
+        --x; --y; --z;
+        return temp;
     }
 
-    void display() {
-        cout << x << " " << y << " " << z << endl;
+    void display() const {
+        cout << "(" << x << ", " << y << ", " << z << ")" << endl;
     }
 };
 
-int main()
-{
-    Three_d my(1, 1, 1);
-    my++;
-    my.display();
-    my--;
-    my.display();
-    --my;
-    my.display();
-    ++my;
-    my.display();
+int main() {
+    Three_d point(10, 20, 30);
+    
+    cout << "初始坐标: ";
+    point.display();
+
+    cout << "执行前缀 ++point: ";
+    (++point).display();
+
+    cout << "执行后缀 point++ (输出的应为自增前的值): ";
+    (point++).display();
+    
+    cout << "后缀自增执行完毕后 point 的当前状态: ";
+    point.display();
+
+    cout << "执行前缀 --point: ";
+    (--point).display();
+
     return 0;
 }
