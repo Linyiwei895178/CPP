@@ -296,63 +296,150 @@
 //     return 0;
 // }
 
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
-class Three_d {
-private:
-    int x, y, z;
-public:
-    Three_d(int i = 0, int j = 0, int k = 0) : x(i), y(j), z(k) {}
+// class Three_d {
+// private:
+//     int x, y, z;
+// public:
+//     Three_d(int i = 0, int j = 0, int k = 0) : x(i), y(j), z(k) {}
 
-    // 1. 前缀自增 (++obj) ：先改变对象状态，再返回修改后的对象自身引用
-    Three_d &operator++() {
-        ++x; ++y; ++z;
-        return *this; // 返回自身引用
-    }
+//     // 1. 前缀自增 (++obj) ：先改变对象状态，再返回修改后的对象自身引用
+//     Three_d &operator++() {
+//         ++x; ++y; ++z;
+//         return *this; // 返回自身引用
+//     }
 
-    // 2. 后缀自增 (obj++) ：利用“哑元(int)”与前缀区分。先保存旧状态，再修改，最后返回旧状态副本
-    Three_d operator++(int) {
-        Three_d temp = *this; // 拷贝保存原状态
-        ++x; ++y; ++z;        // 修改当前对象
-        return temp;          // 返回原状态的临时副本（必须以“值”形式返回）
-    }
+//     // 2. 后缀自增 (obj++) ：利用“哑元(int)”与前缀区分。先保存旧状态，再修改，最后返回旧状态副本
+//     Three_d operator++(int) {
+//         Three_d temp = *this; // 拷贝保存原状态
+//         ++x; ++y; ++z;        // 修改当前对象
+//         return temp;          // 返回原状态的临时副本（必须以“值”形式返回）
+//     }
 
-    // 3. 前缀自减 (--obj)
-    Three_d &operator--() {
-        --x; --y; --z;
-        return *this;
-    }
+//     // 3. 前缀自减 (--obj)
+//     Three_d &operator--() {
+//         --x; --y; --z;
+//         return *this;
+//     }
 
-    // 4. 后缀自减 (obj--)
-    Three_d operator--(int) {
-        Three_d temp = *this;
-        --x; --y; --z;
-        return temp;
-    }
+//     // 4. 后缀自减 (obj--)
+//     Three_d operator--(int) {
+//         Three_d temp = *this;
+//         --x; --y; --z;
+//         return temp;
+//     }
 
-    void display() const {
-        cout << "(" << x << ", " << y << ", " << z << ")" << endl;
-    }
-};
+//     void display() const {
+//         cout << "(" << x << ", " << y << ", " << z << ")" << endl;
+//     }
+// };
 
-int main() {
-    Three_d point(10, 20, 30);
+// int main() {
+//     Three_d point(10, 20, 30);
     
-    cout << "初始坐标: ";
-    point.display();
+//     cout << "初始坐标: ";
+//     point.display();
 
-    cout << "执行前缀 ++point: ";
-    (++point).display();
+//     cout << "执行前缀 ++point: ";
+//     (++point).display();
 
-    cout << "执行后缀 point++ (输出的应为自增前的值): ";
-    (point++).display();
+//     cout << "执行后缀 point++ (输出的应为自增前的值): ";
+//     (point++).display();
     
-    cout << "后缀自增执行完毕后 point 的当前状态: ";
-    point.display();
+//     cout << "后缀自增执行完毕后 point 的当前状态: ";
+//     point.display();
 
-    cout << "执行前缀 --point: ";
-    (--point).display();
+//     cout << "执行前缀 --point: ";
+//     (--point).display();
 
-    return 0;
-}
+//     return 0;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// class Base1 {
+// public:
+//     Base1(int i) { cout << "Constructing Base1 " << i << endl; }
+//     ~Base1() { cout << "Dwstructing Base1 " << endl; }
+// };
+
+// class Base2 {
+// public:
+//     Base2(int j) { cout << "Constructing Base2 " << j << endl; }
+//     ~Base2() { cout << "Destructing Base2 " << endl; }
+// };
+
+// class Base3 {
+// public:
+//     Base3() { cout << "Constructing Base3 *" << endl; }
+//     ~Base3() { cout << "Destructing Base3 *" << endl; }
+// };
+
+// class Derived : public Base2, public Base1, public Base3 {
+// public:
+//     Derived(int a, int b, int c, int d) : Base1(a), member2(d), member1(c), Base2(b) {}
+// private:
+//     Base1 member1;
+//     Base2 member2;
+//     Base3 member3;
+// };
+
+// int main()
+// {
+//     Derived obj(1, 2, 3, 4);
+//     return 0;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// class Base1 {
+// public:
+//     virtual void display() const = 0;
+// };
+
+// class Base2: public Base1{
+// public:
+//     void display() const;
+// };
+
+// void Base2::display() const {
+//     cout << "Base2::display()" << endl;
+// }
+
+// class Derived : public Base2 {
+// public:
+//     void display() const;
+// };
+
+// void Derived::display() const {
+//     cout << "Derived::display()" << endl;
+// }
+
+// void fun(Base1 *ptr) {
+//     ptr->display();
+// }
+
+// int main()
+// {
+//     Base2 base2;
+//     Derived derived;
+//     fun(&base2);
+//     fun(&derived);
+//     return 0;
+// }
+
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     char ch;
+//     while ((ch = cin.get()) != EOF) {
+//         cout.put(ch);
+//     }
+//     return 0;
+// }
