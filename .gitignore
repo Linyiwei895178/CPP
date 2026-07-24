@@ -1,8 +1,4 @@
 *.exe
 .vscode
-build/
-Chapter6/build/
-Chapter7/build/
-Chapter7/LinearEquation/build/
-Chapter8/build/
-Chapter8/Integration/build/
+*/build
+*/*/build
